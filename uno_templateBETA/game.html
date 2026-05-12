@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNO Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Подключаем стили -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="game">
+    
+    <!-- Верхняя панель: инфо об игре -->
+    <div class="top-panel">
+      <!-- Количество карт у ИИ -->
+      <div id="ai-hand-count">ИИ: 0 карт</div>
+
+      <!-- Чей сейчас ход -->
+      <div id="current-turn">Ход: -</div>
+          <!-- Кнопки управления -->
+      <div class="controls">
+        <button id="restart-btn">Новая игра</button>
+        <button id="back-btn"><a href="../index.html">Выход</a></button>
+      </div>
+    </div>
+
+    <!-- Центральная зона стола -->
+    <div class="table-area">
+      
+      <!-- Колода (кнопка взять карту) -->
+      <div id="draw-btn" class="card_back">
+        <p>Колода</p>
+      </div>
+
+      <!-- Сброс (верхняя карта) -->
+      <div id="discard" class="card">
+        Пусто
+      </div>
+    </div>
+
+
+    <!-- Карты игрока -->
+    <div id="player-hand" class="player-hand"></div>
+
+  </div>
+
+  <!-- Подключаем JS (в самом конце, чтобы DOM уже был загружен) -->
+  <script src="script.js"></script>
+</body>
+</html>

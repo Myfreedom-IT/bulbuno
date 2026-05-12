@@ -1,0 +1,283 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --panel-2: #1f2937;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --accent: #f59e0b;
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background:
+    var(--bg);
+}
+
+.game {
+
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.status-panel,
+.table-zone,
+.opponent-zone,
+.player-zone {
+  background: rgba(17, 24, 39, 0.82);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.status-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+
+.status-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.table-zone {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 36px;
+  padding: 28px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.pile-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.opponent-zone,
+.player-zone {
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.ai-hand .mini-card {
+  width: 52px;
+  height: 78px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #111827, #374151);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.card {
+  width: 100px;
+  height: 145px;
+  border-radius: 18px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 28px;
+  border: 0;
+  position: relative;
+  user-select: none;
+}
+
+.card .small {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.card.back {
+  background: linear-gradient(135deg, #111827, #1d4ed8);
+}
+
+.player-card {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-6px);
+}
+
+.player-card.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.red { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.green { background: linear-gradient(135deg, #22c55e, #15803d); }
+.blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.yellow { background: linear-gradient(135deg, #facc15, #ca8a04); color: #111827; }
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #111827;
+  background: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+}
+
+.message {
+  min-height: 22px;
+  text-align: center;
+  color: var(--muted);
+}
+
+
+.player-hand{
+  display: flex;
+  flex-direction: row;
+	flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+
+}
+.controls{
+  display: flex;
+  justify-content: space-evenly;
+  
+}
+#draw-btn{
+  padding: auto 0;
+  font-size: 25px;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
+}
+#restart-btn{
+  padding: 20px 100px;
+  background-color: #B00600;
+  border-radius: 20px;
+  font-size: 25px;
+  border: 0;
+}
+.table-area{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  align-items: center;
+}
+.card_back{
+  background-image: url(./png/potatoes.png);
+  background-size: cover;
+  width: 184px;
+  height: 300px;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+
+}
+#back-btn{
+  padding: 20px 100px;
+  background-color: #B00600;
+  border-radius: 20px;
+  font-size: 25px;
+  border: 0;
+}
+a{
+  text-decoration: none;
+  color: #000000;
+}
+@media (max-width: 720px) {
+  .game {
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .status-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 30%;
+    font-size: 24px;
+  }
+  .player-hand{
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
+  }
+  #restart-btn{
+    padding: 10px;
+  }
+  #back-btn{
+    padding: 25px;
+  }
+}
