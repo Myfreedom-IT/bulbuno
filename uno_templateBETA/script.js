@@ -24,7 +24,9 @@ const state = {
   discardPile: [],   // стопка сброса (стол)
   currentPlayer: 0,  // чей ход (0 = игрок, 1 = ИИ)
   currentColor: null, // текущий цвет
-  direction: 1
+  direction: 1,
+  wins: 0,
+  losses: 0
 }
 
 
@@ -73,6 +75,16 @@ function shuffle(array) {
   return array
 }
 
+function drawCard() {
+  if (state.deck.length === 0) {
+    const top = state.discardPile.pop()
+
+    state.deck = shuffle([...state.discardPile])
+    state.discardPile = [top]
+  }
+
+  return state.deck.pop()
+}
 
 // =====================
 // РАЗДАЧА КАРТ
@@ -81,7 +93,7 @@ function shuffle(array) {
 function dealCards(count = 7) {
   for (let i = 0; i < count; i++) {
     state.players.forEach(player => {
-      const card = state.deck.pop()
+      const card = drawCard()
       if (card) {
         player.hand.push(card)
       }
@@ -94,14 +106,7 @@ function dealCards(count = 7) {
 // =====================
 
 function canPlay(card, topCard, currentColor, playerIndex) {
-  if (card.value === 'wild') return true
-
-  if (card.value === '+4') {
-    const hasOther = state.players[playerIndex].hand.some(c =>
-      c.color === currentColor || c.value === topCard.value
-    )
-    return !hasOther
-  }
+  if (card.value === 'wild' || card.value === '+4') return true
 
   return (
     card.color === currentColor ||
@@ -141,7 +146,7 @@ function playCard(playerIndex, cardIndex) {
     const p = state.players[next]
 
     for (let i = 0; i < 2; i++) {
-      const c = state.deck.pop()
+      const c = drawCard()
       if (c) p.hand.push(c)
     }
     skip = 2
@@ -153,7 +158,7 @@ function playCard(playerIndex, cardIndex) {
     const p = state.players[next]
 
     for (let i = 0; i < 4; i++) {
-      const c = state.deck.pop()
+      const c = drawCard()
       if (c) p.hand.push(c)
     }
     skip = 2
@@ -176,16 +181,26 @@ function playCard(playerIndex, cardIndex) {
 
       chosenColor = map[chosen] || "red"
     } else {
-      const colors = ['red', 'green', 'blue', 'yellow']
-      chosenColor = colors[Math.floor(Math.random() * colors.length)]
+      const colorCount = {
+        red: 0,
+        green: 0,
+        blue: 0,
+        yellow: 0
+      }
+
+      // считаем цвета в руке ИИ
+      player.hand.forEach(c => {
+        if (c.color && colorCount[c.color] !== undefined) {
+          colorCount[c.color]++
+        }
+      })
+
+      // выбираем самый частый цвет
+      chosenColor = Object.keys(colorCount).reduce((a, b) =>
+        colorCount[a] > colorCount[b] ? a : b
+      )
     }
-  }
 
-  if (state.deck.length === 0) {
-    const top = state.discardPile.pop()
-
-    state.deck = shuffle(state.discardPile)
-    state.discardPile = [top]
   }
 
   // удаляем карту
@@ -197,7 +212,25 @@ function playCard(playerIndex, cardIndex) {
 
   // победа
   if (player.hand.length === 0) {
-    alert(`${player.name} победил`)
+
+    if (playerIndex === 0) {
+      state.wins++
+
+      localStorage.setItem('wins', state.wins)
+      localStorage.setItem('losses', state.losses)
+
+      alert('Ты победил!')
+    } else {
+      state.losses++
+
+      localStorage.setItem('wins', state.wins)
+      localStorage.setItem('losses', state.losses)
+
+      alert(`${player.name} победил`)
+    }
+
+    render()
+    return true
   }
 
   // переход хода
@@ -207,7 +240,6 @@ function playCard(playerIndex, cardIndex) {
 
   return true
 }
-
 
 // =====================
 // ИИ ХОД
@@ -231,7 +263,7 @@ function aiTurn() {
       playCard(aiIndex, playableIndex)
     } else {
       // берём карту
-      const newCard = state.deck.pop()
+      const newCard = drawCard()
       if (newCard) ai.hand.push(newCard)
 
       state.currentPlayer = (state.currentPlayer + state.direction + state.players.length) % state.players.length
@@ -259,10 +291,10 @@ function render() {
   const turnEl = document.getElementById('current-turn')
 
   // показываем верхнюю карту
-  const displayColor = topCard?.color || state.currentColor
+  const displayColor = state.currentColor
 
   discardEl.textContent = topCard
-    ? `${topCard.value}`
+    ? `${displayColor} ${topCard.value}`
     : 'Пусто'
   discardEl.style.backgroundSize = 'cover'
 
@@ -285,7 +317,7 @@ function render() {
     cardEl.className = 'card player-card'
 
     // текст карты
-    cardEl.textContent = `${card.value}`
+    cardEl.textContent = `${card.color} ${card.value}`
     if (card.value === 'wild' || card.value === '+4') {
       cardEl.style.color = 'white'
       cardEl.textContent = `${card.value}`
@@ -318,7 +350,7 @@ function render() {
 document.getElementById('draw-btn').addEventListener('click', () => {
   if (state.currentPlayer !== 0) return
 
-  const newCard = state.deck.pop()
+  const newCard = drawCard()
 
   if (newCard) {
     state.players[0].hand.push(newCard)
@@ -343,8 +375,7 @@ document.getElementById('restart-btn').addEventListener('click', initGame)
 // =====================
 
 function initGame() {
-  state.deck = createDeck()
-  shuffle(state.deck)
+  state.deck = shuffle(createDeck())
 
   state.players.forEach(p => p.hand = [])
 
@@ -354,7 +385,7 @@ function initGame() {
   const temp = []
 
   while (state.deck.length > 0) {
-    const card = state.deck.pop()
+    const card = drawCard()
 
     if (!["+4", "wild", '+2', 'rev', 'skip'].includes(card.value)) {
       firstCard = card
@@ -370,6 +401,9 @@ function initGame() {
 
   state.currentColor = firstCard.color
   state.currentPlayer = 0
+
+  state.wins = Number(localStorage.getItem('wins')) || 0
+  state.losses = Number(localStorage.getItem('losses')) || 0
 
   render()
 }
