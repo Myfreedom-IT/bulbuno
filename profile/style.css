@@ -5,6 +5,11 @@
   font-family: "Allerta Stencil", sans-serif;
 }
 
+a{
+  text-decoration: none;
+}
+
+
 body {
   min-height: 100vh; 
   background: #0f1422;
