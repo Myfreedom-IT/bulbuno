@@ -5,11 +5,6 @@
   font-family: "Allerta Stencil", sans-serif;
 }
 
-a{
-  text-decoration: none;
-}
-
-
 body {
   min-height: 100vh; 
   background: #0f1422;
@@ -223,7 +218,8 @@ font-size: 40px;
   .button-strict {
     min-width: auto;
     width: 100%;
-    padding: 24px; 
+    padding: 24px;
+    text-decoration: none;
   }
             .profile-card1 {
                 padding: 28px 28px 40px 28px;
