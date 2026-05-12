@@ -230,3 +230,8 @@ font-size: 40px;
                 letter-spacing: 8px;
             }
           }
+
+a{
+          color: #000000;
+          text-decoration: none;
+        }
