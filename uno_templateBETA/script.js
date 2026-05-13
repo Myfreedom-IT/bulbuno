@@ -26,7 +26,8 @@ const state = {
   currentColor: null, // текущий цвет
   direction: 1,
   wins: 0,
-  losses: 0
+  losses: 0,
+  gameOver: false
 }
 
 
@@ -76,7 +77,14 @@ function shuffle(array) {
 }
 
 function drawCard() {
+
   if (state.deck.length === 0) {
+
+    // если нечего перемешивать
+    if (state.discardPile.length <= 1) {
+      return null
+    }
+
     const top = state.discardPile.pop()
 
     state.deck = shuffle([...state.discardPile])
@@ -105,7 +113,7 @@ function dealCards(count = 7) {
 // ПРОВЕРКА: МОЖНО ЛИ ХОДИТЬ
 // =====================
 
-function canPlay(card, topCard, currentColor, playerIndex) {
+function canPlay(card, topCard, currentColor) {
   if (card.value === 'wild' || card.value === '+4') return true
 
   return (
@@ -125,7 +133,7 @@ function playCard(playerIndex, cardIndex) {
   const topCard = state.discardPile[state.discardPile.length - 1]
 
   if (!card) return false
-  if (!canPlay(card, topCard, state.currentColor, playerIndex)) return false
+  if (!canPlay(card, topCard, state.currentColor)) return false
 
   let chosenColor = state.currentColor
   let skip = 1
@@ -180,6 +188,7 @@ function playCard(playerIndex, cardIndex) {
       }
 
       chosenColor = map[chosen] || "red"
+
     } else {
       const colorCount = {
         red: 0,
@@ -205,16 +214,23 @@ function playCard(playerIndex, cardIndex) {
 
   // удаляем карту
   player.hand.splice(cardIndex, 1)
+
   state.discardPile.push(card)
 
   // обновляем текущий цвет
-  state.currentColor = chosenColor
+  // обычные карты сами задают цвет
+  if (card.color !== null) {
+    state.currentColor = card.color
+  } else {
+    state.currentColor = chosenColor
+  }
 
   // победа
   if (player.hand.length === 0) {
 
     if (playerIndex === 0) {
       state.wins++
+      state.gameOver = true
 
       localStorage.setItem('wins', state.wins)
       localStorage.setItem('losses', state.losses)
@@ -222,6 +238,7 @@ function playCard(playerIndex, cardIndex) {
       alert('Ты победил!')
     } else {
       state.losses++
+      state.gameOver = true
 
       localStorage.setItem('wins', state.wins)
       localStorage.setItem('losses', state.losses)
@@ -254,7 +271,7 @@ function aiTurn() {
 
   // ищем подходящую карту
   const playableIndex = ai.hand.findIndex(card =>
-    canPlay(card, topCard, state.currentColor, aiIndex)
+    canPlay(card, topCard, state.currentColor)
   )
 
   setTimeout(() => {
@@ -291,10 +308,10 @@ function render() {
   const turnEl = document.getElementById('current-turn')
 
   // показываем верхнюю карту
-  const displayColor = state.currentColor
+  const displayColor = topCard.color || state.currentColor
 
   discardEl.textContent = topCard
-    ? `${displayColor} ${topCard.value}`
+    ? `${topCard.value}`
     : 'Пусто'
   discardEl.style.backgroundSize = 'cover'
 
@@ -317,7 +334,7 @@ function render() {
     cardEl.className = 'card player-card'
 
     // текст карты
-    cardEl.textContent = `${card.color} ${card.value}`
+    cardEl.textContent = `${card.value}`
     if (card.value === 'wild' || card.value === '+4') {
       cardEl.style.color = 'white'
       cardEl.textContent = `${card.value}`
@@ -328,7 +345,7 @@ function render() {
 
     // клик по карте
     cardEl.addEventListener('click', () => {
-      if (state.currentPlayer !== 0) return
+      if (state.currentPlayer !== 0 || state.gameOver) return
 
       const success = playCard(0, index)
 
@@ -348,7 +365,7 @@ function render() {
 // =====================
 
 document.getElementById('draw-btn').addEventListener('click', () => {
-  if (state.currentPlayer !== 0) return
+  if (state.currentPlayer !== 0 || state.gameOver) return
 
   const newCard = drawCard()
 
@@ -404,6 +421,8 @@ function initGame() {
 
   state.wins = Number(localStorage.getItem('wins')) || 0
   state.losses = Number(localStorage.getItem('losses')) || 0
+
+  state.gameOver = false
 
   render()
 }
