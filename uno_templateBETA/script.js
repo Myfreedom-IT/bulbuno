@@ -175,7 +175,7 @@ function playCard(playerIndex, cardIndex) {
   // выбор цвета
   if (card.value === 'wild' || card.value === '+4') {
     if (playerIndex === 0) {
-      let chosen = prompt("Choose a color: red, green, blue, yellow")
+      let chosen = prompt("Выбери цвет: красный, зеленый, синий, желтый")
       if (!chosen) chosen = "red"
 
       chosen = chosen.trim().toLowerCase()
