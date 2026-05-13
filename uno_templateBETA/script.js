@@ -181,10 +181,10 @@ function playCard(playerIndex, cardIndex) {
       chosen = chosen.trim().toLowerCase()
 
       const map = {
-        "red": "red", "r": "red",
-        "green": "green", "g": "green",
-        "blue": "blue", "b": "blue",
-        "yellow": "yellow", "y": "yellow"
+        "red": "red", "r": "red", "красный": "red", "к": "red",
+        "green": "green", "g": "green", "зеленый": "green", "з": "green", "зелёный": "green",
+        "blue": "blue", "b": "blue", "синий": "blue", "с": "blue",
+        "yellow": "yellow", "y": "yellow", "желтый": "yellow", "ж": "yellow", "жёлтый": "yellow",
       }
 
       chosenColor = map[chosen] || "red"
