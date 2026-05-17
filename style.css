@@ -8,7 +8,7 @@ a{
 }
 
 body{
-    background-color: #2C3858;
+    background-color: #0f172a;
 }
 .play-button{
     background-color: #B00600;
@@ -28,6 +28,7 @@ body{
 .flex{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .bulbuno{
     font-size: 200px;
@@ -60,4 +61,17 @@ body{
 .bulbuno{
     font-size: 85px;
 }
+.img{
+    width: 100px;
+    height: 100px;
+}
+
+}
+@media (max-width: 550px){
+.buttons{
+    flex-direction: column;
+    display: flex;
+    gap: 40px;
+    padding:5px;
+}   
 }
