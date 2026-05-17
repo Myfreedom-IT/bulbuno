@@ -281,3 +281,8 @@ a{
     padding: 25px;
   }
 }
+@media (max-width: 550px){
+  .card {
+    width: 23%;
+  }
+}
