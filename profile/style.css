@@ -6,20 +6,20 @@
 }
 
 body {
-  min-height: 100vh; 
+  min-height: 100vh;
   background: #0f1422;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px; 
+  padding: 32px;
 }
 
 .profile-card {
   width: 1400px;
   max-width: 100%;
   background-color: #2c3858;
-  padding: 56px 64px 64px 64px; 
-  
+  padding: 56px 64px 64px 64px;
+
   border-radius: 32px;
 }
 
@@ -33,7 +33,7 @@ body {
 
 
 .nick-strict {
-  font-size: 72px; 
+  font-size: 72px;
   font-weight: 400;
   color: #e0e0e0;
   letter-spacing: 8px;
@@ -46,13 +46,13 @@ body {
 .stats-strict-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px; 
-  margin-bottom: 48px; 
+  gap: 64px;
+  margin-bottom: 48px;
 }
 
 .stat-strict-item {
   background: #1e2940;
-  padding: 32px 24px; 
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,19 +62,19 @@ body {
 }
 
 .stat-label-strict {
-  font-size: 22.4px; 
+  font-size: 22.4px;
   font-weight: 400;
   letter-spacing: 4px;
   color: #fdcc03;
   text-transform: uppercase;
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
   text-align: center;
   width: 100%;
   font-family: "Allerta Stencil", sans-serif;
 }
 
 .stat-number-strict {
-  font-size: 96px; 
+  font-size: 96px;
   font-weight: 400;
   color: #e0e0e0;
   line-height: 1;
@@ -85,19 +85,19 @@ body {
 
 .coins-strict {
   background-color: #121b2b;
-  padding: 32px 56px; 
-  margin-bottom: 56px; 
+  padding: 32px 56px;
+  margin-bottom: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   border-radius: 32px;
 }
 
 
 
 .coin-label-strict span {
-  font-size: 44.8px; 
+  font-size: 44.8px;
   font-weight: 400;
   color: #fdcc03;
   letter-spacing: 5px;
@@ -110,11 +110,11 @@ body {
 }
 
 .coin-amount-strict {
-  font-size: 80px; 
+  font-size: 80px;
   font-weight: 400;
   color: #e0e0e0;
   background: #2c3858;
-  padding: 6.4px 44.8px; 
+  padding: 6.4px 44.8px;
   box-shadow: inset 0 -5px 0 #0a101e;
   font-family: "Allerta Stencil", sans-serif;
   border-radius: 32px;
@@ -123,24 +123,24 @@ body {
 .button-container {
   display: flex;
   justify-content: center;
-  margin: 32px 0 0 0; 
+  margin: 32px 0 0 0;
 }
 
 .button-strict {
   background-color: #b00600;
-  padding: 32px 80px; 
-  font-size: 44.8px; 
+  padding: 32px 80px;
+  font-size: 44.8px;
   font-weight: 400;
   letter-spacing: 6px;
   text-transform: uppercase;
   color: #000000;
-  
+
   cursor: pointer;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px; 
+  gap: 16px;
   font-family: "Allerta Stencil", sans-serif;
   border-radius: 32px;
   border: none;
@@ -152,91 +152,117 @@ body {
   box-shadow: 4px 4px 0 #2a0000;
 }
 
- .profile-card1 {
-            width: 1400px;
-            max-width: 100%;
-            background: #2c3858;
-            border-radius: 48px;
-            padding: 40px 56px 56px 56px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-        }
-
-       
-        .profile-header1 {
-            text-align: center;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .profile-header1 h1 {
-            font-family: "Allerta Stencil", sans-serif;
-            font-size: 56px;
-            font-weight: 400;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #fdcc03 0%, #ffdf73 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            padding: 0 16px 8px 16px;
-            
-        }
-        #a{
-          color: #000000;
-          text-decoration: none;
-        }
-@media (max-width: 720px) {
-.profile-header1{
-font-size: 40px;
+.profile-card1 {
+  width: 1400px;
+  max-width: 100%;
+  background: #2c3858;
+  border-radius: 48px;
+  padding: 40px 56px 56px 56px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
 }
+
+
+.profile-header1 {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.profile-header1 h1 {
+  font-family: "Allerta Stencil", sans-serif;
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fdcc03 0%, #ffdf73 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  padding: 0 16px 8px 16px;
+
+}
+
+#a {
+  color: #000000;
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .profile-header1 {
+    font-size: 40px;
+  }
+
   .profile-card {
-    padding: 32px; 
+    padding: 32px;
   }
+
   .nick-strict {
-    font-size: 48px; 
+    font-size: 48px;
   }
+
   .stats-strict-grid {
     grid-template-columns: 1fr;
-    gap: 32px; 
+    gap: 32px;
   }
+
   .coin-label-strict span,
   .button-strict {
-    font-size: 28.8px; 
+    font-size: 28.8px;
   }
+
   .coin-amount-strict,
   .stat-number-strict {
-    font-size: 56px; 
+    font-size: 56px;
   }
+
   .coins-strict {
     flex-direction: column;
-    gap: 16px; 
+    gap: 16px;
     text-align: center;
   }
+
   .button-strict {
     min-width: auto;
     width: 100%;
     padding: 24px;
     text-decoration: none;
   }
-            .profile-card1 {
-                padding: 28px 28px 40px 28px;
-                border-radius: 40px;
-            }
-            .profile-header1 {
-                font-size: 44px;
-                letter-spacing: 8px;
-            }
-          }
 
-a{
-          color: #000000;
-          text-decoration: none;
-        }
-@media (max-width: 550px){
-  .profile-header1 h1{
-  font-size: 40px;
+  .profile-card1 {
+    padding: 28px 28px 40px 28px;
+    border-radius: 40px;
+  }
+
+  .profile-header1 {
+    font-size: 44px;
+    letter-spacing: 8px;
+  }
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+@media (max-width: 550px) {
+  .profile-header1 h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .profile-header1 h1 {
+    font-size: 30px;
+  }
+  .stat-strict-item{
+    width: 95%;
+    min-height: 200px;
+  }
+
+  .stat-label-strict{
+    font-size: 18px;
   }
 }
